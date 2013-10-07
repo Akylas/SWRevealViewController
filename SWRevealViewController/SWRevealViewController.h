@@ -159,7 +159,7 @@ typedef enum
 
 @optional
 
-- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position;
+- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition)position withDuration:(NSTimeInterval)duration;
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position;
 
 - (void)revealController:(SWRevealViewController *)revealController animateToPosition:(FrontViewPosition)position;

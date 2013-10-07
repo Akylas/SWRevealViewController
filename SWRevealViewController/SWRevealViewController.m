@@ -1009,7 +1009,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 {
     void (^rearDeploymentCompletion)() = [self _rearViewDeploymentForNewFrontViewPosition:newPosition];
     void (^rightDeploymentCompletion)() = [self _rightViewDeploymentForNewFrontViewPosition:newPosition];
-    void (^frontDeploymentCompletion)() = [self _frontViewDeploymentForNewFrontViewPosition:newPosition];
+    void (^frontDeploymentCompletion)() = [self _frontViewDeploymentForNewFrontViewPosition:newPosition  withDuration:duration];
     
     void (^animations)() = ^()
     {
@@ -1089,7 +1089,7 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
 
 // Deploy/Undeploy of the front view controller following the containment principles. Returns a block
 // that must be invoked on animation completion in order to finish deployment
-- (void (^)(void))_frontViewDeploymentForNewFrontViewPosition:(FrontViewPosition)newPosition
+- (void (^)(void))_frontViewDeploymentForNewFrontViewPosition:(FrontViewPosition)newPosition withDuration:(NSTimeInterval)duration
 {
     if ( (_rightViewController == nil && newPosition < FrontViewPositionLeft) ||
          (_rearViewController == nil && newPosition > FrontViewPositionLeft) )
@@ -1107,8 +1107,8 @@ static NSString * const SWSegueRightIdentifier = @"sw_right";
     
     if ( positionIsChanging )
     {
-        if ( [_delegate respondsToSelector:@selector(revealController:willMoveToPosition:)] )
-            [_delegate revealController:self willMoveToPosition:newPosition];
+        if ( [_delegate respondsToSelector:@selector(revealController:willMoveToPosition:withDuration:)] )
+            [_delegate revealController:self willMoveToPosition:newPosition withDuration:duration];
     }
     
     _frontViewPosition = newPosition;
